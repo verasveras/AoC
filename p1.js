@@ -20,6 +20,14 @@ function goLeft(blocks){
 	facingMoved[facingIndex] += Number(blocks);
 }
 
+function getDistance(){
+
+	let [north, east, south, west] = facingMoved; 
+	let totalBlocks = Math.abs(north-south) + Math.abs(east-west);
+
+	return totalBlocks;
+
+}
 
 for (let i = 0; i < input.length; i++){
 
@@ -41,8 +49,5 @@ for (let i = 0; i < input.length; i++){
 
 };
 
-let [north, east, south, west] = facingMoved; 
-let totalBlocks = Math.abs(north-south) + Math.abs(east-west); 
-
-return totalBlocks;
+return getDistance()
 
