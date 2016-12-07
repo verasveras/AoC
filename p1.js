@@ -4,6 +4,8 @@ input = input.split(', ');
 let facing = [0, 1, 2, 3]; // north east south west
 let facingMoved = [0, 0, 0, 0]; // how much you've moved in any direction
 let facingIndex = 0; // the current direction you're facing
+let visited = []; // an array of all the coordinates you've seen.
+let firstRepeatedCoord = []; // the first place you visit twice
 
 
 function goRight(blocks){
@@ -24,8 +26,30 @@ function getDistance(){
 
 	let [north, east, south, west] = facingMoved; 
 	let totalBlocks = Math.abs(north-south) + Math.abs(east-west);
-
 	return totalBlocks;
+
+}
+
+function getCoordinates(){
+
+	let [north, east, south, west] = facingMoved; 
+	return `${north-south}, ${east-west}`;
+}
+
+let foundRepeat = false;
+function checkIfVisited(coordinates){
+
+	if (foundRepeat) return false;
+
+	console.log('Checking ', coordinates);
+	if (visited.indexOf(coordinates) >= 0){
+		console.log('Repeated')
+		foundRepeat = true;
+		firstRepeatedCoord = coordinates;
+		return true;
+	}
+
+	return false;
 
 }
 
@@ -33,6 +57,12 @@ for (let i = 0; i < input.length; i++){
 
 	let directions = input[i];
 	blocks = input[i].substring(1);
+
+	let coordinates = getCoordinates();
+	visited.push(coordinates);
+	if (checkIfVisited(coordinates)){
+
+	}
 
 	switch(directions[0]){
 		case 'L':
@@ -49,5 +79,5 @@ for (let i = 0; i < input.length; i++){
 
 };
 
-return getDistance()
+return {finalDistance: getDistance(), firstRepeatedCoord: firstRepeatedCoord}
 
