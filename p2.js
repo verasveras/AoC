@@ -6,14 +6,24 @@ DDLRRULRDURDURULLLLRLDDRDDRLLURLRDLULUDURRLUDLDUDRDULDDULURDRURLLDRRLDURRLUULLRU
 input = input.split('\n');
 input = input.map(line => {return line.split('')})
 
-const keypad = [[1, 2, 3],
-				[4, 5, 6],
-				[7, 8, 9]];
+// Problem 2a keypad
+// const keypad = [[1, 2, 3],
+// 				[4, 5, 6],
+// 				[7, 8, 9]];
+// let outer = 1; // outer array index
+// let inner = 1; // inner array index
+
+// Problem 2b keypad
+const keypad = [[null, null, 1, null, null],
+				[null, 2, 3, 4, null],
+				[5, 6, 7, 8, 9],
+				[null, 'A', 'B', 'C', null],
+				[null, null, 'D', null, null]]
+
+let outer = 2;
+let inner = 0;
 
 let bathroomCode = '';
-let outer = 1; // outer array index
-let inner = 1; // inner array index
-
 // if L move inner -1
 // if R move inner +1
 // if U move outer -1
@@ -34,11 +44,11 @@ function getNumber(input) {
 				break;
 
 			case 'U':
-				if (keypad[outer - 1]) outer --;
+				if (keypad[outer - 1] && keypad[outer - 1][inner]) outer --;
 				break;
 
 			case 'D':
-				if (keypad[outer + 1]) outer ++;
+				if (keypad[outer + 1] && keypad[outer + 1][inner]) outer ++;
 				break;
 
 			default:
