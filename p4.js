@@ -1,17 +1,8 @@
 const input = require('./p4input');
 let sum = 0;
+let roomNumber = '';
 
-for (let i = 0; i < input.length; i++){
-	
-
-	// parse all the information you need off the string
-	let room = input[i].split('-');
-	let last = room.length - 1;
-	let letters = room.slice(0, last).join('');
-	letters = letters.split('').sort().join('');
-	let sector = room[last].match(/\d+/)[0];
-	let checksum = room[last].match(/[a-z]+/)[0];
-	
+function makeCompressedString (letters) {
 
 	// get the frequency count of all the letters
 	// compressedLetters is all the letters that show up
@@ -35,7 +26,12 @@ for (let i = 0; i < input.length; i++){
 	compressedLetters.push(letter);
 	compressedCount.push(count);
 
-	// calculate the actualChecksum of the characters
+	return { compressedLetters, compressedCount };
+
+}
+
+function checkIfValid (compressedLetters, compressedCount, checksum) {
+
 	let actualCheckSum = [];
 
 	for (let k = 0; k < 5; k++){
@@ -47,11 +43,67 @@ for (let i = 0; i < input.length; i++){
 
 	actualCheckSum = actualCheckSum.join('');
 
-	// compare the actual checksum and the given checksum
-	if (actualCheckSum == checksum) {
-		sum += Number(sector);
+	if (actualCheckSum == checksum) return true;
+	return false;
+
+}
+
+function decryptString(roomString, sector){
+
+
+	let shift = sector % 26;
+	let newString = [];
+
+	for (let i = 0; i < roomString.length; i++){
+
+		let currentString = roomString[i];
+		let newStringSection = '';
+
+		for (let j = 0; j < currentString.length; j++){
+			let charCode = currentString.charCodeAt(j);
+			charCode += shift;
+			if (charCode > 122) charCode -= 26;
+			newStringSection += String.fromCharCode(charCode);
+		}
+
+		newString.push(newStringSection);
+	}
+
+	return newString.join('-');
+}
+
+function checkIfNorthRoom(roomString){
+
+	if (roomString.match(/north/)) return true;
+	return false;
+
+}
+
+for (let i = 0; i < input.length; i++){
+
+	// parse all the information you need off the string
+	let room = input[i].split('-');
+	let last = room.length - 1;
+	let letters = room.slice(0, last).join('');
+	letters = letters.split('').sort().join('');
+
+	let roomString = room.slice(0, last);
+	let sector = Number(room[last].match(/\d+/)[0]);
+	let checksum = room[last].match(/[a-z]+/)[0];
+	
+
+	let { compressedLetters, compressedCount } = makeCompressedString(letters);
+	if (checkIfValid(compressedLetters, compressedCount, checksum)) {
+
+		sum += sector;
+		let decryptedString = decryptString(roomString, sector);
+		
+		if (checkIfNorthRoom(decryptedString)){
+			roomNumber = sector;
+		}
+
 	}
 
 }
 
-console.log(sum);
+console.log(sum, roomNumber);
