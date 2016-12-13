@@ -2,17 +2,13 @@ let input = require('./p6input');
 let counts = [{}, {}, {}, {}, {}, {}, {}, {}];
 
 function addToCounts(char, position){
-	console.log(position);
 	let count = counts[position];
 	count[char] = count[char] ? count[char] + 1 : 1;
-	console.log(counts);
 }
-
 
 function findMaxChar(position){
 
 	let obj = counts[position];
-	console.log(obj);
 	let max = 0;
 	let char = '';
 
@@ -26,7 +22,7 @@ function findMaxChar(position){
 	return char;
 }
 
-input.forEach((line) => {
+input.forEach((line, index) => {
 	console.log(line);
 	line = line.split('');
 	line.forEach(addToCounts);
@@ -35,13 +31,11 @@ input.forEach((line) => {
 
 let string = '';
 
-for (let i = 0; i < 6; i++){
+for (let i = 0; i < 8; i++){
 	string += findMaxChar(i);
 }
 
-
 console.log(string);
-
 
 
 
