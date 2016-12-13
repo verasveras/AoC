@@ -22,6 +22,22 @@ function findMaxChar(position){
 	return char;
 }
 
+function findLeastChar(position){
+
+	let obj = counts[position];
+	let min = 589;
+	let char = '';
+
+	for (var chars in obj){
+		if (obj[chars] < min){
+		 min = obj[chars];
+			char = chars;
+		}
+	}
+	
+	return char;
+}
+
 input.forEach((line, index) => {
 	console.log(line);
 	line = line.split('');
@@ -29,13 +45,16 @@ input.forEach((line, index) => {
 	console.log(counts);
 })
 
-let string = '';
+let stringMax = '';
+let stringLeast = '';
+
 
 for (let i = 0; i < 8; i++){
-	string += findMaxChar(i);
+	stringMax += findMaxChar(i);
+	stringLeast += findLeastChar(i);
 }
 
-console.log(string);
+console.log(stringMax, stringLeast);
 
 
 
