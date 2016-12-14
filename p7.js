@@ -1,53 +1,33 @@
 let input = require('./p7input');
+let bracketSplit = /\[(.*?)\]/g; // to find anything inside brackets;
 
+function checkPattern(line){
 
-// function checkFour(string){
+	for (let i = 0; i < line.length; i++){
+		if (line[i] === line[i + 3] && line[i + 2] === line[i + 1]){
+			if (line[i] !== line[i + 1]) return true;
+		}
+	}
 
-// 	if (string.length < 4) return false;
-// 	if (string[0] === string[3] && string[1] === string[2]){
-// 		if (string[0] !== string[1]) return true;
-// 	}
-// 	return false;
-// }
-
-
-// function checkString(string){
-
-// 	for (let i = 0; i < string.length; i++){
-// 		let slice = string[i] + string[i+1] + string[i+2] + string[i+3];
-// 		if (checkString(slice)) return true;
-// 	}
-// 	return false;
-
-// }
-
-
-// function checkBrackets(matches){
-
-// 	let seenPattern = false;
-// 	matches.forEach((match) =>{
-// 		if (checkString(match)) seenPattern = true;
-// 	})
-// 	return seenPattern;
-
-// }
-
+	return false;
+}
 
 let count = 0;
-// let re = /\[(.*?)\]/g;
 
-input.forEach((line) => {
+input.forEach((line) =>{
 
-	let re = /\[(.*?)\]/g;
-	let matches = line.match(re);
+	let brackets = line.match(bracketSplit);
+	console.log(brackets);
+	let valid = true;
 
-	// there are no patterns in the matches so those 
-	if (!checkBrackets(matches)){
-
+	if (checkPattern(line)) {
+		brackets.forEach((section) => {
+			if (checkPattern(section)) valid = false;
+		})
 	}
-	// console.log(matches);
-	// checkBrackets(line);
+	else valid = false;
 
+	if (valid) count++;
 
 })
 
