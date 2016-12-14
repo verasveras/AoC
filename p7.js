@@ -12,12 +12,10 @@ function checkPattern(line){
 	return false;
 }
 
-let count = 0;
-
+let countIPs = 0;
 input.forEach((line) =>{
 
 	let brackets = line.match(bracketSplit);
-	console.log(brackets);
 	let valid = true;
 
 	if (checkPattern(line)) {
@@ -26,9 +24,39 @@ input.forEach((line) =>{
 		})
 	}
 	else valid = false;
-
-	if (valid) count++;
+	if (valid) countIPs++;
 
 })
 
-console.log(count);
+function checkShort(line){
+
+	for (let i = 0; i < line.length; i++){
+		if (line[i] === line[i + 2] && line[i] !== line[i + 1]) 
+			return line[i] + line[i + 1] + line[i + 2];
+	}
+
+	return '';
+}
+
+let countSSL = 0;
+input.forEach((line) =>{
+
+	let brackets = line.match(bracketSplit);
+	let noBrackets = line.replace(bracketSplit, '');
+	let valid = true;
+
+	let aba = checkShort(noBrackets);
+	if (aba !=='') {
+		brackets.forEach((section) => {
+			// if (checkPattern(section)) valid = false;
+			
+		})
+	}
+	else valid = false;
+	if (valid) countSSL++;
+
+})
+
+
+
+console.log(countIPs, countSSL);
