@@ -1,4 +1,4 @@
-let input = `wysextplwqpvipxdv[srzvtwbfzqtspxnethm]syqbzgtboxxzpwr[kljvjjkjyojzrstfgrw]obdhcczonzvbfby[svotajtpttohxsh]cooktbyumlpxostt
+module.exports = `wysextplwqpvipxdv[srzvtwbfzqtspxnethm]syqbzgtboxxzpwr[kljvjjkjyojzrstfgrw]obdhcczonzvbfby[svotajtpttohxsh]cooktbyumlpxostt
 emzopymywhhxulxuctj[dwwvkzhoigmbmnf]nxgbgfwqvrypqxppyq[qozsihnhpztcrpbdc]rnhnakmrdcowatw[rhvchmzmyfxlolwe]uysecbspabtauvmixa
 bqooxxweoytjghrqn[hkwwukixothfyglw]kpasnmikmbzcbfi[vlnyszifsaaicagxtqf]ucdyxasusefuuxlx
 rxpusykufgqujfe[rypwoorxdemxffui]cvvcufcqmxoxcphp[witynplrfvquduiot]vcysdcsowcxhphp[gctucefriclxaonpwe]jdprpdvpeumrhokrcjt
@@ -1998,5 +1998,3 @@ vwpklmfpzssyoifbb[bwtpxodxedpdsvgu]azathmhdnqkhbmrdlxn
 iwzncixpjxypnmykke[wlhvfjbumhmtachoab]wtftbolwhpwnropnzv[zhfcmkbwizknymev]twrumqadwvsaciwbwoi[evodjtvrucrzgtwio]fmmbddkwwpaziycik
 dkodbaotlfdaphwzbcc[ldzeemqiovyqjgs]qxibabdusgaistkru[usglloxgycyynmp]aaocvclsocababbzxeg[liaacgfxytuqudp]jvvqsypuoduyhvraak
 bwzsacxgqkbjycgfw[dbnligvrmqscasutn]rbgybqqsgjvlonkut`.split('\n');
-
-module.exports = input;

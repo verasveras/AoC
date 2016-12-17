@@ -30,33 +30,41 @@ input.forEach((line) =>{
 
 function checkShort(line){
 
+	let posibilities = []
+
 	for (let i = 0; i < line.length; i++){
 		if (line[i] === line[i + 2] && line[i] !== line[i + 1]) 
-			return line[i] + line[i + 1] + line[i + 2];
+			posibilities.push(line[i] + line[i + 1] + line[i + 2]);
 	}
 
-	return '';
+	return posibilities;
 }
+
 
 let countSSL = 0;
 input.forEach((line) =>{
 
+	let valid = false;
+	console.log(line);
 	let brackets = line.match(bracketSplit);
 	let noBrackets = line.replace(bracketSplit, '');
-	let valid = true;
+	console.log(noBrackets);
 
-	let aba = checkShort(noBrackets);
-	if (aba !=='') {
-		brackets.forEach((section) => {
-			// if (checkPattern(section)) valid = false;
-			
+	let abaPossibilities = checkShort(noBrackets);
+
+	if (abaPossibilities.length) {
+		abaPossibilities.forEach(function(aba){
+
+			let bab = aba[1] + aba[0] + aba[1];
+			brackets.forEach((section) => {
+				if (section.indexOf(bab) !== -1) {
+					valid = true;
+				}
+			})
 		})
 	}
-	else valid = false;
 	if (valid) countSSL++;
 
 })
-
-
 
 console.log(countIPs, countSSL);
